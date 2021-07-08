@@ -9,6 +9,8 @@
   },
   "dependencies": {
     "core-js": "^3.6.5",
+    "simple-keyboard": "^3.2.10",
+    "simple-keyboard-layouts": "^3.0.135",
     "vue": "^2.6.11"
   },
   "devDependencies": {
