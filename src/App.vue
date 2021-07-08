@@ -1,29 +1,21 @@
 <template>
   <div id="app">
-    <div class="input">
-      {{ keyboardValue || '点击虚拟键盘输入内容' }}
+    <div id="first" class="input">
+      {{ keyboardValue || "点击虚拟键盘输入内容" }}
     </div>
     <SimpleKeyboard
       @onChange="onChange"
       @onKeyPress="onKeyPress"
       :input="keyboardValue"
-      :layout="firstLayout"
-      :buttonTheme="firstButtonTheme"
-      keyboard-class="keyboard-first"
-      theme="hg-theme-default myTheme"
-    />
-    <SimpleKeyboard
-      @onChange="onChange"
-      @onKeyPress="onKeyPress"
-      :input="keyboardValue"
-      :layout="secondLayout"
-      keyboard-class="keyboard-second"
+      :layout="layout"
+      :display="display"
     />
   </div>
 </template>
 
 <script>
 import SimpleKeyboard from "./SimpleKeyboard";
+import { layout, display } from './keyboard-config'
 
 export default {
   name: "App",
@@ -32,27 +24,8 @@ export default {
   },
   data: () => ({
     keyboardValue: "",
-    firstLayout: {
-      default: [
-        'q w e r t y u i o p',
-        'a s d f g h j k l',
-        'z x c v b n m'
-      ]
-    },
-    firstButtonTheme: [ 
-        {
-          class: "bg-red",
-          buttons: "Q W E R q w e r",
-        },
-      ],
-    secondLayout: {
-      default: [
-        '1 2 3',
-        '4 5 6',
-        '7 8 9',
-        '0'
-      ]
-    }
+    layout,
+    display
   }),
   methods: {
     onChange(input) {
@@ -60,7 +33,7 @@ export default {
     },
     onKeyPress(button) {
       console.log("button", button);
-    },
+    }
   },
 };
 </script>
@@ -91,7 +64,7 @@ export default {
   width: 200px;
 }
 .myTheme {
-  border: 3px solid #1E88E5;
+  border: 3px solid #1e88e5;
 }
 .bg-red {
   background-color: red !important;

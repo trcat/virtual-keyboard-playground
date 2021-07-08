@@ -5,7 +5,7 @@
 <script>
 import Keyboard from "simple-keyboard";
 import "simple-keyboard/build/css/index.css";
-import layout from "simple-keyboard-layouts/build/layouts/chinese";
+import chineseLayout from "simple-keyboard-layouts/build/layouts/chinese";
 
 export default {
   name: "SimpleKeyboard",
@@ -22,11 +22,12 @@ export default {
     keyboard: null,
   }),
   mounted() {
+    console.log(this.$attrs.display)
     const options = {
       onChange: this.onChange,
       onKeyPress: this.onKeyPress,
-      display: this.initDisplay(),
-      ...layout,
+      mergeDisplay: true,
+      ...chineseLayout,
       ...this.$attrs,
     };
     this.keyboard = new Keyboard(this.keyboardClass, options);
@@ -53,43 +54,7 @@ export default {
       this.keyboard.setOptions({
         layoutName: shiftToggle,
       });
-    },
-    initDisplay() {
-      const letters = [
-        "q",
-        "w",
-        "e",
-        "r",
-        "t",
-        "y",
-        "u",
-        "i",
-        "o",
-        "p",
-        "a",
-        "s",
-        "d",
-        "f",
-        "g",
-        "h",
-        "j",
-        "k",
-        "l",
-        "z",
-        "x",
-        "c",
-        "v",
-        "b",
-        "n",
-        "m",
-      ];
-      const letterDisplay = {};
-      letters.forEach((letter) => {
-        letterDisplay[letter] = letter.toUpperCase();
-      });
-
-      return { ...letterDisplay };
-    },
+    }
   },
   watch: {
     input(input) {
