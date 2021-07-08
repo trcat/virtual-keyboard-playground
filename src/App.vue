@@ -6,7 +6,18 @@
     <SimpleKeyboard
       @onChange="onChange"
       @onKeyPress="onKeyPress"
-      :input="input"
+      :input="keyboardValue"
+      :layout="firstLayout"
+      :buttonTheme="firstButtonTheme"
+      keyboard-class="keyboard-first"
+      theme="hg-theme-default myTheme"
+    />
+    <SimpleKeyboard
+      @onChange="onChange"
+      @onKeyPress="onKeyPress"
+      :input="keyboardValue"
+      :layout="secondLayout"
+      keyboard-class="keyboard-second"
     />
   </div>
 </template>
@@ -21,11 +32,31 @@ export default {
   },
   data: () => ({
     keyboardValue: "",
+    firstLayout: {
+      default: [
+        'q w e r t y u i o p',
+        'a s d f g h j k l',
+        'z x c v b n m'
+      ]
+    },
+    firstButtonTheme: [ 
+        {
+          class: "bg-red",
+          buttons: "Q W E R q w e r",
+        },
+      ],
+    secondLayout: {
+      default: [
+        '1 2 3',
+        '4 5 6',
+        '7 8 9',
+        '0'
+      ]
+    }
   }),
   methods: {
     onChange(input) {
-      this.input = input;
-      this.keyboardValue = "";
+      this.keyboardValue = input;
     },
     onKeyPress(button) {
       console.log("button", button);
@@ -49,7 +80,21 @@ export default {
   box-sizing: border-box;
 }
 
-.simple-keyboard {
-  max-width: 850px;
+[class^="keyboard"] {
+  margin-bottom: 8px;
+}
+
+.keyboard-first {
+  width: 400px;
+}
+.keyboard-second {
+  width: 200px;
+}
+.myTheme {
+  border: 3px solid #1E88E5;
+}
+.bg-red {
+  background-color: red !important;
+  color: #fff !important;
 }
 </style>
